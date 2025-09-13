@@ -1,61 +1,141 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# xCloud Server Management API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Track
+**Backend API** – CRUD + Bulk Operations for Servers
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 1️⃣ Project Setup
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Requirements
+- PHP >= 8.2
+- Laravel - 12  
+- MySQL / MariaDB  
+- Composer  
+- (Optional) Postman for testing  
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Steps
+1. Clone repository:
+```bash
+git clone <repo_url>
+cd xcloud-demo
+```
+2. Install dependencies:
+```composer install```
 
-## Learning Laravel
+3. Create .env file
+```cp .env.example .env```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+4. Set DB credentials in .env
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+5. Run migrations & seeders:
+```php artisan migrate --seed```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+6. Generate app key:
+```php artisan key:generate```
 
-## Laravel Sponsors
+7. Run development server:
+```php artisan ser```
+8. Access API at: http://localhost:8000/api/
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 2️⃣ Authentication
 
-### Premium Partners
+Token-based authentication using Laravel Sanctum.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+All server routes are protected, include Bearer token in headers:
 
-## Contributing
+Authorization: Bearer <your_token_here>
+Accept: application/json
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 3️⃣ API Endpoints
 
-## Code of Conduct
+| Action        | Method | Endpoint          | Body / Params                                                         |
+| ------------- | ------ | ----------------- | --------------------------------------------------------------------- |
+| List Servers  | GET    | /api/servers      | -                                                                     |
+| Show Server   | GET    | /api/servers/{id} | id (URL param)                                                        |
+| Create Server | POST   | /api/servers      | name, ip\_address, provider, status, cpu\_cores, ram\_mb, storage\_gb |
+| Update Server | PUT    | /api/servers/{id} | Any of name, status, cpu\_cores, ram\_mb, storage\_gb                 |
+| Delete Server | DELETE | /api/servers/{id} | id (URL param)                                                        |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+| Action             | Method | Endpoint                        | Body (JSON)                                  |
+| ------------------ | ------ | ------------------------------- | -------------------------------------------- |
+| Bulk Delete        | POST   | /api/servers/bulk-delete        | { "ids": \[1,2,3] }                          |
+| Bulk Update Status | POST   | /api/servers/bulk-update-status | { "ids": \[1,2,3], "status": "maintenance" } |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+## 4️⃣ Validation Rules
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+--name → required, unique per provider
+
+--ip_address → required, valid IPv4, unique
+
+--provider → required, one of [aws, digitalocean, vultr, other]
+
+--status → required, one of [active, inactive, maintenance]
+
+--cpu_cores → integer, 1–128
+
+--ram_mb → integer, 512–1048576
+
+storage_gb → integer, 10–1048576
+
+## 5️⃣ Postman Collection
+
+--Postman collection exported at: /postman/xcloud-api-collection.json
+
+--Includes all CRUD + bulk operations
+
+
+## 6️⃣ AI Collaboration
+
+<b>Used ChatGPT to generate:</b>
+
+--Controller methods
+
+--Validation rules
+
+--Route design
+
+--Bulk operations API
+
+--Reviewed and debugged AI code for:
+
+--Validation edge cases
+
+--Fillable fields
+
+--Proper RESTful endpoints
+
+## 7️⃣ Debugging Journey
+
+--Issue: POST /api/servers/index returned Laravel welcome page → fixed by correcting route to /api/servers
+
+--Issue: Duplicate IPs → enforced unique validation
+
+--Mass assignment errors → added $fillable fields in Server model
+
+## 8️⃣ Tech Decisions & Trade-offs
+
+--Backend-focused due to 30-min time constraint
+
+--Sanctum authentication for simplicity
+
+--Bulk operations added for bonus points
+
+--Frontend skipped – optional if time allowed
+
+## 9️⃣ Time Spent
+
+~2–3 hours for CRUD + bulk operations
+
+~30 min for Postman collection + README
+
+## 10️⃣ Author & Optional: Live Demo
+
+**Author:** Leaya  
+**Email:** leaya@example.com  
+**Location:** Dhaka, Bangladesh  
+**Role:** Software Engineer / Backend Developer  
+
+**Live Demo:** Not included (local testing via Postman)

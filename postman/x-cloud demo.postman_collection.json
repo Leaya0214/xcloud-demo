@@ -1,0 +1,384 @@
+{
+	"info": {
+		"_postman_id": "938bc821-b225-43d7-bd31-56a4a04bd8bc",
+		"name": "x-cloud demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "38044731"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Registration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "3|4UT2NblNTceXNVtHeP22wNjscTseQ22sfBM2fFVNf45acf1e"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Admin",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{base_url}}api/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{base_url}}api/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "1|5V26iUo8L3BbhZGejyaf9V5hwQYibtKXdvjYLq9u520f54e4"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Admin",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{base_url}}api/logout"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Server",
+			"item": [
+				{
+					"name": "Servers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|aPGFAjqRjsiGIZ7CgsfKLRexLJZhhCZjf9BCgospaf7c3aee"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "{{base_url}}api/servers"
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|aPGFAjqRjsiGIZ7CgsfKLRexLJZhhCZjf9BCgospaf7c3aee"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "web-server-1",
+									"contentType": "",
+									"type": "text"
+								},
+								{
+									"key": "ip_address",
+									"value": "192.168.1.10",
+									"type": "text"
+								},
+								{
+									"key": "provider",
+									"value": "aws",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "active",
+									"type": "text"
+								},
+								{
+									"key": "cpu_cores",
+									"value": "64",
+									"type": "text"
+								},
+								{
+									"key": "ram_mb",
+									"value": "1478",
+									"type": "text"
+								},
+								{
+									"key": "storage_gb",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{base_url}}api/servers"
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{base_url}}api/servers/5001"
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|aPGFAjqRjsiGIZ7CgsfKLRexLJZhhCZjf9BCgospaf7c3aee"
+							}
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Demo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}api/servers/4"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|aPGFAjqRjsiGIZ7CgsfKLRexLJZhhCZjf9BCgospaf7c3aee"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{base_url}}api/servers/5001"
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Delete",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "2|aPGFAjqRjsiGIZ7CgsfKLRexLJZhhCZjf9BCgospaf7c3aee"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ids\": [2,3,4],\r\n    \"status\" : \"maintenance\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}api/servers/bulk-update-status"
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Update Status",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://xcloud-backend.test/",
+			"type": "string"
+		}
+	]
+}
